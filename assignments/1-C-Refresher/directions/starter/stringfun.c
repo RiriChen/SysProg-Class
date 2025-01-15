@@ -17,6 +17,7 @@ void reverse_string(char *, int);
 void print_words(char *, int);
 int  replace_word(char *, int, int, char *, char *);
 
+// Sets up the malloced buffer with teh user inputted string
 int setup_buff(char *buff, char *user_str, int len){
     //TODO: #4:  Implement the setup buff as per the directions
     char *buf = buff;
@@ -72,6 +73,7 @@ void usage(char *exename){
 
 }
 
+// Counts the total number of words in the string `buff`
 int count_words(char *buff, int len, int str_len){
     //YOU MUST IMPLEMENT
     char *buf = buff;
@@ -90,6 +92,7 @@ int count_words(char *buff, int len, int str_len){
 }
 
 //ADD OTHER HELPER FUNCTIONS HERE FOR OTHER REQUIRED PROGRAM OPTIONS
+// Reverses the `buff` string
 void reverse_string(char *buff, int str_len)
 {
     char *start = buff;
@@ -105,6 +108,7 @@ void reverse_string(char *buff, int str_len)
     }
 }
 
+// Prints out each word along with the number of characters in each
 void print_words(char *buff, int str_len)
 {
     char *buf = buff;
@@ -138,6 +142,7 @@ void print_words(char *buff, int str_len)
     printf("\nNumber of words returned: %d\n", word_cnt);
 }
 
+// Replace the first instance of `find` with `replacer` in the string `buff`
 int replace_word(char *buff, int len, int str_len, char *find, char *replacer)
 {
     char *buf = buff;
@@ -165,6 +170,7 @@ int replace_word(char *buff, int len, int str_len, char *find, char *replacer)
         if (!*f) {
             char *end = buff + str_len;
 
+            // shifting of characters
             if (replacer_len > find_len) {
                 end += replacer_len;
                 while (end >= start) {
