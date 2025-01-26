@@ -93,9 +93,53 @@ int get_student(int fd, int id, student_t *s)
  */
 int add_student(int fd, int id, char *fname, char *lname, int gpa)
 {
+<<<<<<< HEAD
     // TODO
     printf(M_NOT_IMPL);
     return NOT_IMPLEMENTED_YET;
+=======
+    struct student new_student;
+    struct student tmp_student;
+    off_t offset;
+
+    if (validate_range(id, gpa) != NO_ERROR) {
+        return ERR_DB_OP;
+    }
+
+    offset = id * STUDENT_RECORD_SIZE;
+    if (lseek(fd, offset, SEEK_SET) == -1) {
+        printf(M_ERR_DB_READ);
+        return ERR_DB_FILE;
+    }
+
+    if (read(fd, &tmp_student, STUDENT_RECORD_SIZE) == -1) {
+        printf(M_ERR_DB_READ);
+        return ERR_DB_FILE;
+    }
+
+    if (tmp_student.id == id) {
+        printf(M_ERR_DB_ADD_DUP, id);
+        return ERR_DB_OP;
+    }
+
+    new_student.id = id;
+    new_student.gpa = gpa;
+    strncpy(new_student.fname, fname, sizeof(new_student.fname) - 1);
+    strncpy(new_student.lname, lname, sizeof(new_student.lname) - 1);
+
+    if (lseek(fd, offset, SEEK_SET) == -1) {
+        perror(M_ERR_DB_READ);
+        return ERR_DB_FILE;
+    }
+
+    if (write(fd, &new_student, STUDENT_RECORD_SIZE) == -1) {
+        printf(M_ERR_DB_WRITE);
+        return ERR_DB_FILE;
+    }
+
+    printf(M_STD_ADDED, id);
+    return NO_ERROR;
+>>>>>>> 8618cdf (wk4: mod add func to have correct index write implementation)
 }
 
 /*
