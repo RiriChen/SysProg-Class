@@ -56,7 +56,7 @@ void usage(char *);
 
 //useful format strings for print students
 //For example to print the header in the required output:
-//  printf(STUDENT_PRINT_HDR_STRING, "ID","FIRST NAME", 
+//  printf(STUDENT_PRINT_HDR_STRING, "ID","FIRST NAME",
 //                                   "LAST_NAME", "GPA");
 #define  STUDENT_PRINT_HDR_STRING   "%-6s %-24s %-32s %-3s\n"
 #define  STUDENT_PRINT_FMT_STRING   "%-6d %-24.24s %-32.32s %-3.2f\n"
