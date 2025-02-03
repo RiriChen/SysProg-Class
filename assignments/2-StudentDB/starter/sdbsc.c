@@ -144,6 +144,12 @@ int add_student(int fd, int id, char *fname, char *lname, int gpa)
     strncpy(new_student.fname, fname, sizeof(new_student.fname) - 1);
     strncpy(new_student.lname, lname, sizeof(new_student.lname) - 1);
 
+
+    off_t off = id * STUDENT_RECORD_SIZE;
+    if (lseek(fd, off, SEEK_SET) == -1) {
+        printf(M_ERR_DB_READ);
+        return ERR_DB_FILE;
+    }
     if (write(fd, &new_student, STUDENT_RECORD_SIZE) == -1) {
         printf(M_ERR_DB_WRITE);
         return ERR_DB_FILE;
@@ -310,7 +316,7 @@ int print_db(int fd)
         return ERR_DB_FILE;
     }
 
-    printf(STUDENT_PRINT_HDR_STRING, "ID", "FIRST NAME", "LAST_NAME", "GPA");
+    printf(STUDENT_PRINT_HDR_STRING, "ID", "FIRST_NAME", "LAST_NAME", "GPA");
 
     while ((sz = read(fd, &tmp_student, STUDENT_RECORD_SIZE)) > 0) {
         if (tmp_student.id != DELETED_STUDENT_ID) {
