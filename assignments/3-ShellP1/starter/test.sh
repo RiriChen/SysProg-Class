@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 @test "Simple Command" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 test_command
 exit
 EOF
@@ -14,7 +14,7 @@ EOF
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
@@ -27,7 +27,7 @@ EOF
 }
 
 @test "Simple Command with Args" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 cmd -a1 -a2
 exit
 EOF
@@ -35,12 +35,12 @@ EOF
     # Strip all whitespace (spaces, tabs, newlines) from the output
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
-    # Expected output 
+    # Expected output
     expected_output="dsh>PARSEDCOMMANDLINE-TOTALCOMMANDS1<1>cmd[-a1-a2]dsh>"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
@@ -54,7 +54,7 @@ EOF
 
 
 @test "No command provided" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 
 exit
 EOF
@@ -67,7 +67,7 @@ EOF
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
@@ -80,7 +80,7 @@ EOF
 }
 
 @test "Two commands" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 command_one | command_two
 exit
 EOF
@@ -93,7 +93,7 @@ EOF
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
@@ -106,7 +106,7 @@ EOF
 }
 
 @test "three commands with args" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 cmd1 a1 a2 a3 | cmd2 a4 a5 a6 | cmd3 a7 a8 a9
 exit
 EOF
@@ -119,7 +119,7 @@ EOF
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
@@ -132,7 +132,7 @@ EOF
 }
 
 @test "try max (8) commands" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 cmd1 | cmd2 | cmd3 | cmd4 | cmd5 | cmd6 | cmd7 | cmd8
 exit
 EOF
@@ -145,7 +145,7 @@ EOF
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
@@ -158,7 +158,7 @@ EOF
 }
 
 @test "try too many commands" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 cmd1 | cmd2 | cmd3 | cmd4 | cmd5 | cmd6 | cmd7 | cmd8 | cmd9
 exit
 EOF
@@ -171,7 +171,7 @@ EOF
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
@@ -184,7 +184,7 @@ EOF
 }
 
 @test "kitchen sink - multiple commands" {
-    run ./dsh <<EOF                
+    run ./dsh <<EOF
 cmd1
 cmd2 arg arg2
 p1 | p2
@@ -199,7 +199,7 @@ EOF
 
     # These echo commands will help with debugging and will only print
     #if the test fails
-    echo "Captured stdout:" 
+    echo "Captured stdout:"
     echo "Output: $output"
     echo "Exit Status: $status"
 
