@@ -46,15 +46,21 @@
  */
 int main()
 {
-    char cmd_buff[SH_CMD_MAX];  // Buffer for user input
-    int rc = 0;                 // Return code from build_cmd_list
-    command_list_t clist;       // Command list structure
+    char *cmd_buff;
+    int rc = 0;
+    command_list_t clist;
+
+    cmd_buff = malloc(SH_CMD_MAX);
+    if (cmd_buff == NULL) {
+        fprintf(stderr, "error: memory allocation failed.\n");
+        return 1;
+    }
 
     while (1) {
-        printf("%s", SH_PROMPT);
+        printf(SH_PROMPT);
         if (fgets(cmd_buff, SH_CMD_MAX, stdin) == NULL) {
             printf("\n");
-            break;  // Break on EOF or error
+            break;
         }
 
         cmd_buff[strcspn(cmd_buff, "\n")] = '\0';
@@ -92,5 +98,6 @@ int main()
         }
     }
 
+    free(cmd_buff);
     return 0;
 }
