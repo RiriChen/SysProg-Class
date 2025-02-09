@@ -46,5 +46,6 @@ int build_cmd_list(char *cmd_line, command_list_t *clist);
 #define CMD_OK_HEADER "PARSED COMMAND LINE - TOTAL COMMANDS %d\n"
 #define CMD_WARN_NO_CMD "warning: no commands provided\n"
 #define CMD_ERR_PIPE_LIMIT "error: piping limited to %d commands\n"
+#define CMD_ERR_CMD_ARG_LIMIT "error: cmds + args limited to %d\n"
 
 #endif

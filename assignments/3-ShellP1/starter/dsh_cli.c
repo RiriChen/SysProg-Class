@@ -46,10 +46,51 @@
  */
 int main()
 {
-    char *cmd_buff;
-    int rc = 0;
-    command_list_t clist;
+    char cmd_buff[SH_CMD_MAX];  // Buffer for user input
+    int rc = 0;                 // Return code from build_cmd_list
+    command_list_t clist;       // Command list structure
 
-    printf(M_NOT_IMPL);
-    exit(EXIT_NOT_IMPL);
+    while (1) {
+        printf("%s", SH_PROMPT);
+        if (fgets(cmd_buff, SH_CMD_MAX, stdin) == NULL) {
+            printf("\n");
+            break;  // Break on EOF or error
+        }
+
+        cmd_buff[strcspn(cmd_buff, "\n")] = '\0';
+
+        if (strcmp(cmd_buff, EXIT_CMD) == 0) {
+            break;
+        }
+
+        rc = build_cmd_list(cmd_buff, &clist);
+
+        switch (rc) {
+            case WARN_NO_CMDS:
+                printf(CMD_WARN_NO_CMD);
+                break;
+            case ERR_TOO_MANY_COMMANDS:
+                printf(CMD_ERR_PIPE_LIMIT, CMD_MAX);
+                break;
+            case ERR_CMD_OR_ARGS_TOO_BIG:
+                printf(CMD_ERR_CMD_ARG_LIMIT, SH_CMD_MAX);
+                break;
+            case OK:
+                printf(CMD_OK_HEADER, clist.num);
+                for (int i = 0; i < clist.num; i++) {
+                    if (clist.commands[i].args[0] != '\0') {
+                        printf("<%d> %s [%s]\n", i + 1, clist.commands[i].exe, clist.commands[i].args);
+                    }
+                    else {
+                        printf("<%d> %s\n", i + 1, clist.commands[i].exe);
+                    }
+                }
+                break;
+            default:
+                printf("error: an unexpected error occurred.\n");
+                break;
+        }
+    }
+
+    return 0;
 }
