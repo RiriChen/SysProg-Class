@@ -69,6 +69,10 @@ int main()
             break;
         }
 
+        if (strncmp(cmd_buff, "dragon", 6) == 0) {
+            print_dragon();
+        }
+
         rc = build_cmd_list(cmd_buff, &clist);
 
         switch (rc) {
