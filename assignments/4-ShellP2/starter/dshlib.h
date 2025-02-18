@@ -1,5 +1,5 @@
 #ifndef __DSHLIB_H__
-    #define __DSHLIB_H__
+#define __DSHLIB_H__
 
 
 //Constants for command structure sizes
@@ -17,7 +17,7 @@ typedef struct cmd_buff
     char *_cmd_buffer;
 } cmd_buff_t;
 
-/* WIP - Move to next assignment 
+/* WIP - Move to next assignment
 #define N_ARG_MAX    15     //MAX number of args for a command
 typedef struct command{
     char exe [EXE_MAX];
@@ -29,9 +29,11 @@ typedef struct command{
 
 
 //Special character #defines
-#define SPACE_CHAR  ' '
-#define PIPE_CHAR   '|'
-#define PIPE_STRING "|"
+#define SPACE_CHAR   ' '
+#define SPACE_STRING " "
+#define PIPE_CHAR    '|'
+#define PIPE_STRING  "|"
+#define QUOTE_CHAR   '"'
 
 #define SH_PROMPT "dsh2> "
 #define EXIT_CMD "exit"
@@ -61,7 +63,7 @@ typedef enum {
     BI_EXECUTED,
     BI_RC,
 } Built_In_Cmds;
-Built_In_Cmds match_command(const char *input); 
+Built_In_Cmds match_command(const char *input);
 Built_In_Cmds exec_built_in_cmd(cmd_buff_t *cmd);
 
 //main execution context
