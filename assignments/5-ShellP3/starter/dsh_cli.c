@@ -7,7 +7,10 @@
 /* DO NOT EDIT
  * main() logic moved to exec_local_cmd_loop() in dshlib.c
 */
-int main(){
+int main()
+{
   int rc = exec_local_cmd_loop();
   printf("cmd loop returned %d\n", rc);
+
+  return rc;
 }
