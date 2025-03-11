@@ -18,7 +18,7 @@
 #define RDSH_COMM_BUFF_SZ       (1024*64)   //64K
 #define STOP_SERVER_SC          200         //returned from pipeline excution
                                             //if the command is to stop the
-                                            //server.  See documentation for 
+                                            //server.  See documentation for
                                             //exec_client_requests() for more info
 
 //end of message delimiter.  This is super important.  TCP is a stream, therefore
@@ -26,8 +26,8 @@
 //there are many common techniques for this, but one of the simplest ways is to
 //use an end of stream marker.  Since rsh is a "shell" program we will be using
 //ascii code 0x04, which is commonly used as the end-of-file (EOF) character in
-//linux based systems. 
-static const char RDSH_EOF_CHAR = 0x04;    
+//linux based systems.
+static const char RDSH_EOF_CHAR = 0x04;
 
 //rdsh specific error codes for functions
 #define ERR_RDSH_COMMUNICATION  -50     //Used for communication errors
@@ -54,7 +54,7 @@ static const char RDSH_EOF_CHAR = 0x04;
 int start_client(char *address, int port);
 int client_cleanup(int cli_socket, char *cmd_buff, char *rsp_buff, int rc);
 int exec_remote_cmd_loop(char *address, int port);
-    
+
 
 //server prototypes for rsh_server.c - see documentation for each function to
 //see what they do

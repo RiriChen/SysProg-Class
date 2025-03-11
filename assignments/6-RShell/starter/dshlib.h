@@ -37,6 +37,7 @@ typedef struct command_list{
 #define SPACE_CHAR  ' '
 #define PIPE_CHAR   '|'
 #define PIPE_STRING "|"
+#define QUOTE_CHAR  '"'
 
 #define SH_PROMPT       "dsh4> "
 #define EXIT_CMD        "exit"
@@ -74,7 +75,7 @@ typedef enum {
     BI_NOT_BI,
     BI_EXECUTED,
 } Built_In_Cmds;
-Built_In_Cmds match_command(const char *input); 
+Built_In_Cmds match_command(const char *input);
 Built_In_Cmds exec_built_in_cmd(cmd_buff_t *cmd);
 
 //main execution context
@@ -87,6 +88,7 @@ int execute_pipeline(command_list_t *clist);
 #define CMD_OK_HEADER       "PARSED COMMAND LINE - TOTAL COMMANDS %d\n"
 #define CMD_WARN_NO_CMD     "warning: no commands provided\n"
 #define CMD_ERR_PIPE_LIMIT  "error: piping limited to %d commands\n"
-#define BI_NOT_IMPLEMENTED "not implemented"
+#define CMD_ERR_EXECUTE     "error: fail to execute external commands\n"
+#define BI_NOT_IMPLEMENTED  "not implemented"
 
 #endif

@@ -27,7 +27,7 @@ typedef struct cmd_args{
 //You dont really need to understand this but the C runtime library provides
 //an getopt() service to simplify handling command line arguments.  This
 //code will help setup dsh to handle triggering client or server mode along
-//with passing optional connection parameters. 
+//with passing optional connection parameters.
 
 void print_usage(const char *progname) {
   printf("Usage: %s [-c | -s] [-i IP] [-p PORT] [-x] [-h]\n", progname);
