@@ -24,6 +24,38 @@
 
 void print_dragon();
 
+int build_cmd_list(char *cmd_line, command_list_t *clist) {
+    char *token;
+    int i = 0;
+
+    clist->num = 0;
+
+    token = strtok(cmd_line, PIPE_STRING);
+    while (token != NULL && i < CMD_MAX) {
+        if (alloc_cmd_buff(&clist->commands[i]) != OK) {
+            return ERR_MEMORY;
+        }
+
+        int rc = build_cmd_buff(token, &clist->commands[i]);
+        if (rc == WARN_NO_CMDS) {
+            printf(CMD_WARN_NO_CMD);
+            return WARN_NO_CMDS;
+        }
+
+        clist->num++;
+        i++;
+
+        token = strtok(NULL, PIPE_STRING);
+    }
+
+    if (i >= CMD_MAX) {
+        printf(CMD_ERR_PIPE_LIMIT, CMD_MAX);
+        return ERR_TOO_MANY_COMMANDS;
+    }
+
+    return OK;
+}
+
 int alloc_cmd_buff(cmd_buff_t *cmd_buff)
 {
     cmd_buff->_cmd_buffer = malloc(SH_CMD_MAX);
